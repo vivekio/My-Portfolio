@@ -1,6 +1,6 @@
 'use client';
 
-import { Briefcase, burger, Code, Folder, User, Mail, X } from 'lucide-react';
+import { Briefcase, Code, Folder, User, Mail, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 

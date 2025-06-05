@@ -66,7 +66,7 @@ const skills: Skill[] = [
 
 export default function SkillProgress() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, threshold: 0.3 });
+  const isInView = useInView(sectionRef, { once: true });
   const controls = useAnimation();
   const [progressValues, setProgressValues] = useState<number[]>(skills.map(() => 0));
 
