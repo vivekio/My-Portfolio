@@ -1,361 +1,229 @@
-// 'use client'
-// import { useEffect, useRef, useState } from 'react';
-// import { CircularProgress } from '@mui/material';
-// import { motion, useAnimation, useInView } from 'framer-motion';
-// import Image from 'next/image';
-
-// type Skill = {
-//   name: string;
-//   value: number;
-//   color: 'success' | 'warning' | 'primary' | 'error' | 'info' | 'inherit';
-//   logo: string; // New: path to logo
-// };
-
-// const skills: Skill[] = [
-//   {
-//     name: 'JavaScript',
-//     value: 95,
-//     color: 'warning', // Yellow for JS
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-//   },
-//   {
-//     name: 'React.js',
-//     value: 92,
-//     color: 'primary', // Blue for React
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-//   },
-//   {
-//     name: 'Next.js',
-//     value: 90,
-//     color: 'inherit', // Black/white logo - keep neutral
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
-//   },
-//   {
-//     name: 'Node.js',
-//     value: 95,
-//     color: 'success', // Green for Node
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-//   },
-//   {
-//     name: 'Express.js',
-//     value: 95,
-//     color: 'inherit', // Black logo - neutral
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
-//   },
-//   {
-//     name: 'MySQL',
-//     value: 94,
-//     color: 'info', // Blue tones for MySQL
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
-//   },
-//   {
-//     name: 'MongoDB',
-//     value: 90,
-//     color: 'success', // Green for MongoDB
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-//   },
-//   {
-//     name: 'Git & GitHub',
-//     value: 90,
-//     color: 'error', // Orange/red for Git
-//     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
-//   },
-// ];
-
-// export default function SkillProgress() {
-//   const sectionRef = useRef<HTMLDivElement>(null);
-//   const isInView = useInView(sectionRef, { once: true });
-//   const controls = useAnimation();
-//   const [progressValues, setProgressValues] = useState<number[]>(skills.map(() => 0));
-
-//   // Animate progress bar values when in view
-//   useEffect(() => {
-//     if (isInView) {
-//       const animate = () => {
-//         setProgressValues(prev =>
-//           prev.map((val, i) =>
-//             val < skills[i].value ? Math.min(val + 1, skills[i].value) : val
-//           )
-//         );
-//         if (progressValues.some((val, i) => val < skills[i].value)) {
-//           requestAnimationFrame(animate);
-//         }
-//       };
-//       requestAnimationFrame(animate);
-//       controls.start('visible');
-//     }
-//   }, [isInView]);
-
-//   // Motion Variants
-//   const cardVariants = {
-//     hidden: { opacity: 0, scale: 0.8, y: 50 },
-//     visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6 } },
-//   };
-
-//   return (
-//     <section
-//       ref={sectionRef}
-//       id="skills"
-//       className="py-20 px-4 bg-gradient-to-br from-white to-gray-50 text-center"
-//     >
-//       <h2 className="text-4xl font-bold mb-4 text-gray-800">My Skills</h2>
-//       <p className="text-gray-500 max-w-2xl mx-auto mb-12">
-//         My technical skill set and current proficiency levels.
-//       </p>
-
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
-//         {skills.map((skill, idx) => (
-//           <motion.div
-//             key={idx}
-//             className="bg-white rounded-2xl shadow-md p-6"
-//             initial="hidden"
-//             animate={controls}
-//             variants={cardVariants}
-//             whileHover={{ scale: 1.05 }}
-//           >
-//             <div className="relative inline-flex justify-center items-center mb-4">
-//               <CircularProgress
-//                 variant="determinate"
-//                 value={progressValues[idx]}
-//                 color={skill.color}
-//                 size={100}
-//                 thickness={5}
-//               />
-//               <div className="absolute w-10 h-10">
-//                 <Image
-//                   src={skill.logo}
-//                   alt={skill.name}
-//                   width={40}
-//                   height={40}
-//                   className="object-contain"
-//                 />
-//               </div>
-//             </div>
-//             <h4 className="text-lg font-semibold text-gray-700">{skill.name}</h4>
-//             {/* <p className="text-sm text-gray-500 mt-1">Proficiency in {skill.name}</p> */}
-//           </motion.div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import Image from "next/image";
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Code2,
+  Server,
+  Database,
+  Cloud,
+  BrainCircuit,
+  Wrench,
+} from "lucide-react";
 
-type Skill = {
-  name: string;
-  logo: string;
-  level: number; // 1–5
-  category:
-    | "Frontend"
-    | "Backend"
-    | "Database"
-    | "Tools & Others"
-    | "DevOps & Deployment";
-};
-
-const skills: Skill[] = [
-  // Frontend
-  {
-    name: "JavaScript (ES6+)",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    level: 5,
-    category: "Frontend",
-  },
-  {
-    name: "React.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    level: 5,
-    category: "Frontend",
-  },
-  {
-    name: "Next.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    level: 5,
-    category: "Frontend",
-  },
-
-  // Backend
-  {
-    name: "Node.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    level: 5,
-    category: "Backend",
-  },
-  {
-    name: "Express.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-    level: 4,
-    category: "Backend",
-  },
-  {
-    name: "Socket.io",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
-    level: 4,
-    category: "Backend",
-  },
-
-  // Database
-  {
-    name: "MongoDB",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    level: 4,
-    category: "Database",
-  },
-  {
-    name: "MySQL",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-    level: 4,
-    category: "Database",
-  },
-
-  // Tools & Others
-  {
-    name: "Git & GitHub",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    level: 5,
-    category: "Tools & Others",
-  },
-  {
-    name: "Postman / Thunder Client",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-    level: 5,
-    category: "Tools & Others",
-  },
-  {
-    name: "VS Code",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-    level: 5,
-    category: "Tools & Others",
-  },
-  {
-    name: "Windows Server",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg",
-    level: 4,
-    category: "DevOps & Deployment",
-  },
-  {
-    name: "Nginx",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg",
-    level: 4,
-    category: "DevOps & Deployment",
-  },
-  {
-    name: "AWS",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
-    level: 3,
-    category: "DevOps & Deployment",
-  },
-  // {
-  //   name: "PM2",
-  //   logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pm2/pm2-original.svg",
-  //   level: 4,
-  //   category: "DevOps & Deployment",
-  // },
-];
-
-const categories: Array<Skill["category"]> = [
-  "Frontend",
-  "Backend",
-  "Database",
-  "DevOps & Deployment",
-  "Tools & Others",
-];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.96 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } },
-};
-
-export default function SkillProgress() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) controls.start("visible");
-  }, [isInView, controls]);
+export default function Skills() {
+  const skillCategories = [
+    {
+      title: "Frontend Development",
+      description: "Building modern, responsive, and scalable user interfaces.",
+      icon: Code2,
+      skills: [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "TypeScript",
+        "React.js",
+        "Next.js",
+        "Tailwind CSS",
+        "Material UI",
+        "Bootstrap",
+      ],
+    },
+    {
+      title: "Backend Development",
+      description: "Creating secure APIs and scalable backend systems.",
+      icon: Server,
+      skills: [
+        "Node.js",
+        "Express.js",
+        "REST API",
+        "GraphQL",
+        "JWT",
+        "OAuth",
+        "Socket.IO",
+      ],
+    },
+    {
+      title: "Database Management",
+      description: "Designing optimized and high-performance databases.",
+      icon: Database,
+      skills: ["MongoDB", "MySQL", "PostgreSQL", "Redis"],
+    },
+    {
+      title: "DevOps & Cloud",
+      description: "Deploying, managing, and scaling cloud infrastructure.",
+      icon: Cloud,
+      skills: [
+        "AWS",
+        "VPS Management",
+        "Nginx",
+        "PM2",
+        "Docker",
+        "CI/CD",
+        "SSL Setup",
+        "Domain Management",
+        "Vercel",
+        "Render",
+      ],
+    },
+    {
+      title: "AI & Automation",
+      description: "Integrating AI solutions and workflow automation.",
+      icon: BrainCircuit,
+      skills: [
+        "OpenAI API",
+        "Gemini API",
+        "LLM Integration",
+        "AI Chatbots",
+        "Prompt Engineering",
+        "Workflow Automation",
+        "AI Agents",
+      ],
+    },
+    {
+      title: "Tools & Collaboration",
+      description: "Development tools, project management, and teamwork.",
+      icon: Wrench,
+      skills: [
+        "Git",
+        "GitHub",
+        "Postman",
+        "VS Code",
+        "Jira",
+        "Team Collaboration",
+        "Leadership",
+        "Agile Development",
+        "Problem Solving",
+      ],
+    },
+  ];
 
   return (
     <section
-      ref={sectionRef}
       id="skills"
-      className="py-20 px-4 bg-gradient-to-b from-white via-gray-50 to-slate-100"
+      className="relative py-10 overflow-hidden bg-background"
     >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold mb-3 text-gray-900 text-center">
-          Skills &amp; Expertise
-        </h2>
-        <p className="text-gray-500 max-w-2xl mx-auto mb-12 text-center">
-          A snapshot of my core MERN-stack skills, tools, and technologies.
-        </p>
+      {/* Background Glow */}
+      <div className="absolute top-20 left-20 w-72 h-72 bg-white/[0.03] rounded-full blur-[120px]" />
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-white/[0.02] rounded-full blur-[140px]" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {categories.map((category) => {
-            const categorySkills = skills.filter(
-              (skill) => skill.category === category
-            );
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-12 h-[2px] bg-foreground" />
+            <h2 className="text-sm md:text-base font-semibold tracking-widest uppercase text-muted-foreground">
+              Technical Arsenal
+            </h2>
+          </div>
 
-            if (!categorySkills.length) return null;
+          <h2 className="text-5xl md:text-7xl font-black leading-none">
+            SKILLS &
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground">
+              TECHNOLOGIES
+            </span>
+          </h2>
+
+          <p className="mt-6 max-w-2xl text-muted-foreground text-lg leading-relaxed">
+            A collection of technologies, frameworks, cloud platforms, AI tools,
+            and development practices I use to build scalable digital products.
+          </p>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {skillCategories.map((category, idx) => {
+            const Icon = category.icon;
 
             return (
               <motion.div
-                key={category}
-                variants={cardVariants}
-                initial="hidden"
-                animate={controls}
-                whileHover={{
-                  y: -4,
-                  boxShadow: "0 20px 40px rgba(15,23,42,0.08)",
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: idx * 0.1,
                 }}
-                className="bg-white/90 border border-gray-100 rounded-3xl p-6 shadow-sm backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-8 hover:border-white/20 hover:shadow-[0_0_50px_rgba(255,255,255,0.08)] transition-all duration-500"
               >
-                <h3 className="text-xl font-semibold text-slate-900 mb-4">
-                  {category}
-                </h3>
+                {/* Hover Glow */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/[0.04] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="space-y-4">
-                  {categorySkills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center justify-between rounded-2xl bg-slate-50 px-3 py-2"
+                {/* Header */}
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                      {category.title}
+                    </h3>
+
+                    <p className="text-muted-foreground text-sm max-w-md">
+                      {category.description}
+                    </p>
+                  </div>
+
+                  <div className="w-14 h-14 rounded-2xl border border-white/10 bg-white/[0.03] flex items-center justify-center">
+                    <Icon className="w-7 h-7 text-foreground" />
+                  </div>
+                </div>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-3">
+                  {category.skills.map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-sm font-medium text-muted-foreground hover:text-white hover:border-white/20 hover:bg-white/[0.06] transition-all duration-300 cursor-default"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-2xl bg-white shadow-sm flex items-center justify-center">
-                          <Image
-                            src={skill.logo}
-                            alt={skill.name}
-                            width={26}
-                            height={26}
-                            className="object-contain"
-                          />
-                        </div>
-                        <span className="text-sm font-medium text-slate-800">
-                          {skill.name}
-                        </span>
-                      </div>
-
-                      {/* Level dots like reference image */}
-                      <div className="flex gap-1.5">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <span
-                            key={i}
-                            className={`h-2 w-2 rounded-full ${
-                              i < skill.level ? "bg-orange-500" : "bg-slate-200"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                      {skill}
+                    </span>
                   ))}
+                </div>
+
+                {/* Footer */}
+                <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/10">
+                  <span className="text-sm text-muted-foreground">
+                    {category.skills.length} Technologies
+                  </span>
+
+                  <span className="text-sm font-semibold text-foreground">
+                    Advanced
+                  </span>
                 </div>
               </motion.div>
             );
           })}
         </div>
+
+        {/* Bottom Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20"
+        >
+          {[
+            { value: "1.5+", label: "Years Experience" },
+            { value: "20+", label: "Projects Built" },
+            { value: "30+", label: "Technologies" },
+            { value: "100%", label: "Dedication" },
+          ].map((stat, idx) => (
+            <div
+              key={idx}
+              className="text-center border border-white/10 rounded-3xl p-6 bg-white/[0.02]"
+            >
+              <h3 className="text-3xl md:text-4xl font-black">{stat.value}</h3>
+              <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

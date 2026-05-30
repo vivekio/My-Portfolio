@@ -1,124 +1,226 @@
 "use client";
+
 import React, { useState } from "react";
-import { Mail, Phone, Github, Linkedin, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Send, Github, Linkedin } from "lucide-react";
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+export default function ContactUs() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const myEmail = process.env.NEXT_PUBLIC_RECEIVER_EMAIL || "";
-  const myPhone = process.env.NEXT_PUBLIC_RECEIVER_PHONE || "";
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("sending");
     setLoading(true);
-    setSuccess(false);
-
     const res = await fetch("/api/send", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(formData),
     });
-
     setLoading(false);
     if (res.ok) {
-      setSuccess(true);
-      setForm({ name: "", email: "", message: "" });
+      setStatus("sent");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus(""), 3000);
     } else {
       alert("Something went wrong. Please try again.");
     }
   };
 
   return (
-    <section id ="contact" className="max-w-7xl mx-auto px-6 py-20 flex flex-col lg:flex-row gap-12">
-      {/* Left Side - Info & Icons */}
-      <div className="lg:w-1/2 space-y-6">
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Let’s connect</h2>
-        <p className="text-gray-600 dark:text-gray-300 text-base">
-          Feel free to reach out for collaborations or just a friendly hello 👋
-        </p>
-
-      <div className="space-y-4">
-  <div className="flex items-center space-x-3 text-gray-700 dark:text-gray-300">
-    <Mail className="w-5 h-5 text-yellow-500" />
-    <a href={`mailto:${myEmail}`} className="hover:underline">
-      {myEmail}
-    </a>
-  </div>
-  <div className="flex items-center space-x-3 text-gray-700 dark:text-gray-300">
-    <Phone className="w-5 h-5 text-yellow-500" />
-    <a href={`tel:${myPhone}`} className="hover:underline">
-      {myPhone}
-    </a>
-  </div>
-  <div className="flex items-center space-x-3 text-gray-700 dark:text-gray-300">
-    <MapPin className="w-5 h-5 text-yellow-500" />
-    <span> Ahmedabad , Gujarat , India</span>
-  </div>
-</div>
-
-
-        {/* Social Media Icons */}
-        <div className="flex space-x-6 pt-6">
-          <a href="https://github.com/vivekio" target="_blank" rel="noopener noreferrer">
-            <Github className="w-6 h-6 hover:text-yellow-500 transition" />
-          </a>
-          <a href="https://www.linkedin.com/in/vivek-pankhaniya-011556223" target="_blank" rel="noopener noreferrer">
-            <Linkedin className="w-6 h-6 hover:text-yellow-500 transition" />
-          </a>
-        </div>
-      </div>
-
-      {/* Right Side - Contact Form */}
-      <div className="lg:w-1/2">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white text-center lg:text-left mb-2">Contact Us</h2>
-          <div>
-            <label className="block text-sm font-medium mb-1">Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={form.name}
-              onChange={handleChange}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 bg-white dark:bg-gray-800 dark:text-white"
-            />
+    <section
+      id="contact"
+      className="py-24 relative overflow-hidden bg-background"
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
+          <div className="inline-flex items-center gap-2 mb-4 justify-center w-full">
+            <span className="w-8 h-[2px] bg-foreground" />
+            <h2 className="text-sm md:text-base font-semibold tracking-widest uppercase text-muted-foreground">
+              Get In Touch
+            </h2>
+            <span className="w-8 h-[2px] bg-foreground" />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 bg-white dark:bg-gray-800 dark:text-white"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Message</label>
-            <textarea
-              name="message"
-              rows={4}
-              required
-              value={form.message}
-              onChange={handleChange}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 bg-white dark:bg-gray-800 dark:text-white"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded"
-            disabled={loading}
+          <h3 className="text-4xl md:text-5xl font-black tracking-tighter text-foreground">
+            LET&apos;S WORK <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground">
+              TOGETHER
+            </span>
+          </h3>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col justify-center space-y-12"
           >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-          {success && <p className="text-green-600 pt-2">Message sent successfully!</p>}
-        </form>
+            <div>
+              <h4 className="text-2xl font-bold  mb-6">Start a conversation</h4>
+              <p className="text-muted-foreground font-light leading-relaxed max-w-md">
+                I&apos;m currently available for freelance projects and
+                full-time opportunities. If you&apos;re looking for a developer
+                to build robust applications or solve complex technical
+                challenges, let&apos;s connect.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <a
+                href="mailto:pankhaniyavivek9@gmail.com"
+                className="flex items-center gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-full glass flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
+                    Email
+                  </p>
+                  <p className="text-lg text-foreground font-medium group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-muted-foreground transition-all">
+                    pankhaniyavivek10@gmail.com
+                  </p>
+                </div>
+              </a>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full glass flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
+                    Location
+                  </p>
+                  <p className="text-lg text-foreground font-medium">
+                    Ahmedabad, Gujarat
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <a
+                href="https://github.com/vivekpankhaniya"
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/vivek-pankhaniya-011556223/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="glass p-8 md:p-10 rounded-3xl border border-border space-y-6 relative overflow-hidden"
+            >
+              {/* Form Background Blur effect */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-foreground opacity-[0.03] rounded-full blur-3xl pointer-events-none" />
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-foreground ml-1"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-xl bg-background border border-border focus:border-foreground focus:ring-1 focus:ring-foreground outline-none transition-all placeholder:text-muted-foreground"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-foreground ml-1"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-xl bg-background border border-border focus:border-foreground focus:ring-1 focus:ring-foreground outline-none transition-all placeholder:text-muted-foreground"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium text-foreground ml-1"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="w-full px-5 py-4 rounded-xl bg-background border border-border focus:border-foreground focus:ring-1 focus:ring-foreground outline-none transition-all resize-none placeholder:text-muted-foreground"
+                  placeholder="How can I help you?"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-4 rounded-xl bg-foreground text-background font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  "Sending..."
+                ) : status === "sent" ? (
+                  "Message Sent!"
+                ) : (
+                  <>
+                    Send Message <Send className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,91 +1,112 @@
-'use client';
+"use client";
 
-import { Briefcase, Code, Folder, User, Mail, X } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "About", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
+  ];
 
   return (
-    <nav className="flex justify-between items-center px-6 py-4 w-full bg-gradient-to-r from-gray-50 to-yellow-50 sticky top-0 z-50">
-      <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-        Vivek Pankhaniya
-      </h1>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "py-4 glass shadow-lg" : "py-6 bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" className="hover-target group">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-black tracking-tighter text-foreground">
+              VP
+            </span>
+            <span className="w-2 h-2 rounded-full bg-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        </Link>
 
-      {/* Desktop Menu */}
-      <div className="hidden md:flex space-x-6 font-medium items-center">
-        <Link href="#experience" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors">
-          <Briefcase size={18} />
-          <span>Experience</span>
-        </Link>
-        <Link href="#skills" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors">
-          <Code size={18} />
-          <span>Skills</span>
-        </Link>
-        <Link href="#projects" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors">
-          <Folder size={18} />
-          <span>Projects</span>
-        </Link>
-        <Link href="#About" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors">
-          <User size={18} />
-          <span>About me</span>
-        </Link>
-        <Link href="#contact" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors">
-          <Mail size={18} />
-          <span>Contacts</span>
-        </Link>
-      </div>
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hover-target relative group"
+            >
+              {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full" />
+            </Link>
+          ))}
 
-      {/* Hamburger Icon for Mobile */}
-      <div className="md:hidden">
-        <button onClick={toggleMenu} className="text-gray-900 dark:text-white focus:outline-none">
-          {isOpen ? <X size={24} /> : <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>}
-        </button>
-      </div>
+          <Link
+            href="#contact"
+            className="hover-target px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold hover:scale-105 transition-transform"
+          >
+            Let&apos;s Talk
+          </Link>
+        </div>
 
-      {/* Mobile Menu */}
-      <div className={`md:hidden fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out z-50`}>
-        <div className="flex justify-end p-4">
-          <button onClick={toggleMenu} className="text-gray-900 dark:text-white focus:outline-none">
-            <X size={24} />
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center gap-4">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-foreground focus:outline-none"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
-        <div className="flex flex-col space-y-6 p-6 font-medium">
-          <Link href="#experience" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors" onClick={toggleMenu}>
-            <Briefcase size={18} />
-            <span>Experience</span>
-          </Link>
-          <Link href="#skills" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors" onClick={toggleMenu}>
-            <Code size={18} />
-            <span>Skills</span>
-          </Link>
-          <Link href="#projects" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors" onClick={toggleMenu}>
-            <Folder size={18} />
-            <span>Projects</span>
-          </Link>
-          <Link href="#About" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors" onClick={toggleMenu}>
-            <User size={18} />
-            <span>About me</span>
-          </Link>
-          <Link href="#contact" className="nav-link flex items-center space-x-2 hover:text-yellow-500 transition-colors" onClick={toggleMenu}>
-            <Mail size={18} />
-            <span>Contacts</span>
-          </Link>
-        </div>
       </div>
 
-      {/* Overlay for Mobile Menu */}
-      {isOpen && (
-        <div
-          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={toggleMenu}
-        ></div>
-      )}
-    </nav>
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 w-full glass border-t border-border py-6 px-6 flex flex-col gap-6 md:hidden shadow-2xl"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-medium text-foreground hover:text-muted-foreground transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="mt-4 px-6 py-3 rounded-full bg-foreground text-background text-center font-semibold w-full"
+            >
+              Let&apos;s Talk
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

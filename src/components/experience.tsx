@@ -1,128 +1,109 @@
-// 'use client'
-// import { Button } from "@mui/material";
-
-// export default function Experience() {
-//   const experiences = [
-//     {
-//       id: 1,
-//       title: "Frontend Developer Intern",
-//       company: "Angel infotech LLP - Rajkot ",
-//       period: "Jun 2024",
-//       description:
-//         `Completed a 1-month internship as a React Developer, where I built responsive UI components and transformed Figma designs into functional React code.
-// Gained hands-on experience in real-world projects, focusing on performance optimization, cross-browser compatibility, and agile collaboration.`,
-//     },
-//     {
-//       id: 2,
-//       title: "Full Stack Developer Intern",
-//       company: "Hexagon Infosoft Solutions - Ahmedabad",
-//       period: "Jan 2025 - Jun 2025",
-//       description:
-//         ` Worked as a Full Stack Development Intern at Hexagon Infosoft, building web apps using the MERN stack, MySQL, and secure authentication with JWT & OTP.
-// Developed RESTful APIs, real-time features with Socket.IO, and enhanced dashboards with UI/UX improvements, validations, and deployment experience.`,
-//     },
-
-//   ];
-
-//   return (
-//   <section id="experience" className="py-20 px-4 bg-gradient-to-br from-white to-gray-100">
-//       <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">
-//         Work Experience
-//       </h2>
-
-//       <div className="flex justify-center">
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl w-full">
-//           {experiences.map((exp) => (
-//             <div
-//               key={exp.id}
-//               className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1"
-//             >
-//               <h3 className="text-xl font-semibold text-gray-800 mb-1">
-//                 {exp.title}
-//               </h3>
-//               <p className="text-sm text-yellow-500 font-medium">{exp.company}</p>
-//               <p className="text-sm text-gray-400 mb-3 italic">{exp.period}</p>
-//               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-//                 {exp.description}
-//               </p>
-//               <Button variant="outlined" size="small">
-//                 Learn More
-//               </Button>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
 "use client";
+
+import React from "react";
+import { motion } from "framer-motion";
 
 export default function Experience() {
   const experiences = [
     {
-      id: 3,
-      title: "Full Stack Developer",
-      company: "Actowiz Solutions Pvt. Ltd  - Ahmedabad",
-      period: "Jun 2025 - Present",
-      description: `Creating high-performance MERN applications by building intuitive, dynamic UIs, integrating third-party APIs, and managing complex data workflows with optimized MongoDB queries.`,
-      level: "step-2",
+      company: "Actowiz Solutions Pvt. Ltd.",
+      role: "Full Stack Developer",
+      date: "Jun 2025 - Present",
+      responsibilities: [
+        "Enterprise API Development",
+        "API Hub Systems",
+        "Automation Platforms",
+        "Dashboard Development",
+        "Backend Architecture",
+        "Data Delivery Optimization",
+        "Third Party API Integration",
+      ],
     },
     {
-      id: 2,
-      title: "Full Stack Developer Intern",
-      company: "Hexagon Infosoft Solutions - Ahmedabad",
-      period: "Jan 2025 - Jun 2025",
-      description: `Worked as a Full Stack Development Intern using MERN stack, MySQL, JWT, OTP auth, Socket.IO, and REST APIs.`,
-      level: "step-2",
+      company: "Hexagon Infosoft Solutions",
+      role: "Full Stack Developer",
+      date: "Jan 2025 - Jun 2025",
+      responsibilities: [
+        "Assisted in full stack web application development",
+        "Worked on backend API integrations and frontend user interfaces",
+      ],
     },
     {
-      id: 1,
-      title: "Frontend Developer Intern",
-      company: "Angel Infotech LLP - Rajkot",
-      period: "Jun 2024",
-      description: `Completed a 1-month internship as a React Developer, where I built responsive UI components and transformed Figma designs into functional React code.`,
-      level: "step-1",
+      company: "Angel Infotech LLP",
+      role: "Frontend Developer Intern",
+      date: "Jun 2024",
+      responsibilities: [
+        "Developed responsive frontend components",
+        "Collaborated with the design team to implement UI/UX best practices",
+      ],
     },
   ];
 
   return (
-    <section id="experience" className="py-20 px-6 bg-white">
-      <h2 className="text-4xl font-bold text-center text-gray-900 mb-14">
-        Experience
-      </h2>
-
-      <div className="relative max-w-4xl mx-auto">
-        {/* vertical center line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[3px] h-full bg-gray-300"></div>
-
-        {experiences.map((exp, index) => (
-          <div
-            key={exp.id}
-            className={`relative mb-20 flex ${
-              index % 2 === 0 ? "justify-start" : "justify-end"
-            }`}
-          >
-            {/* Dot in center */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 -top-1">
-              <div className="w-5 h-5 bg-yellow-500 rounded-full border-4 border-white shadow-md"></div>
-            </div>
-
-            {/* Card */}
-            <div
-              className={`w-[45%] p-6 bg-white rounded-xl shadow-md border border-gray-200`}
-            >
-              <p className="text-sm font-bold text-yellow-500">{exp.period}</p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mt-1">
-                {exp.title}
-              </h3>
-
-              <p className="text-gray-600 text-sm mb-3">{exp.company}</p>
-
-              <p className="text-gray-700 leading-relaxed">{exp.description}</p>
-            </div>
+    <section id="experience" className="py-10 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-8 h-[2px] bg-foreground" />
+            <h2 className="text-sm md:text-base font-semibold tracking-widest uppercase text-muted-foreground">
+              Career Path
+            </h2>
+            <span className="w-8 h-[2px] bg-foreground" />
           </div>
-        ))}
+          <h3 className="text-4xl md:text-5xl font-black tracking-tighter text-foreground">
+            PROFESSIONAL <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground">
+              EXPERIENCE
+            </span>
+          </h3>
+        </motion.div>
+
+        <div className="relative border-l-2 border-border ml-4 md:ml-0 md:pl-0">
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.2 }}
+              className="mb-12 relative pl-8 md:pl-12"
+            >
+              {/* Timeline Dot */}
+              <div className="absolute w-4 h-4 rounded-full bg-foreground left-[-9px] top-1 border-4 border-background" />
+
+              <div className="glass p-8 rounded-3xl border border-border group hover:border-foreground/30 transition-colors">
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                  <h4 className="text-2xl font-bold text-foreground">
+                    {exp.role}
+                  </h4>
+                  <span className="px-4 py-1.5 rounded-full bg-muted text-sm font-medium text-foreground whitespace-nowrap">
+                    {exp.date}
+                  </span>
+                </div>
+                <h5 className="text-lg text-muted-foreground font-semibold mb-6">
+                  {exp.company}
+                </h5>
+                <ul className="space-y-3">
+                  {exp.responsibilities.map((resp, rIdx) => (
+                    <li
+                      key={rIdx}
+                      className="flex items-start gap-3 font-light"
+                    >
+                      <span className=" mt-1.5 opacity-90">▹</span>
+                      {resp}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
