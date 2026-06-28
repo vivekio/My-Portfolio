@@ -97,6 +97,29 @@ export default function ContactUs() {
                   </p>
                 </div>
               </a>
+              <a
+                href="https://wa.me/919510558572"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-full glass flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg
+                    className="w-5 h-5 text-foreground fill-current"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.62.962 3.376 1.47 5.358 1.47 5.58 0 10.121-4.544 10.125-10.13.002-2.707-1.043-5.251-2.946-7.158C17.28 1.43 14.74 0.38 12.007 0.38c-5.586 0-10.126 4.544-10.13 10.13-.001 2.01.522 3.977 1.517 5.714l-.992 3.624 3.709-.972zm11.666-6.028c-.303-.151-1.793-.885-2.071-.985-.278-.1-.48-.15-.68.15-.2.3-.777.985-.953 1.185-.177.2-.353.226-.656.075-3.04-1.52-3.79-2.228-5.15-4.57-.363-.62.363-.576.953-1.758.1-.2.05-.375-.025-.526-.075-.15-.68-1.637-.932-2.246-.247-.592-.497-.512-.68-.522-.177-.008-.38-.01-.58-.01-.2 0-.527.075-.803.375-.278.3-.803.785-.803 1.91 0 1.125.82 2.21 1.932 2.36 1.113.15 4.302 3.314 5.928 3.93.387.147.74.237 1.01.32.39.125.746.107 1.026.066.313-.047 1.793-.735 2.047-1.442.253-.708.253-1.314.177-1.442-.076-.127-.278-.203-.58-.354z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
+                    WhatsApp
+                  </p>
+                  <p className="text-lg text-foreground font-medium group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-muted-foreground transition-all">
+                    +91 XXXXX XXXXX
+                  </p>
+                </div>
+              </a>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-foreground" />
@@ -143,7 +166,9 @@ export default function ContactUs() {
             {/* Calendly CTA Card */}
             <div className="relative overflow-hidden rounded-3xl border border-border bg-white/[0.02] p-8 shadow-lg">
               <div className="absolute top-0 right-0 w-32 h-32 bg-foreground/[0.02] rounded-full blur-2xl pointer-events-none" />
-              <h4 className="text-xl font-bold text-foreground mb-2">Prefer a quick call?</h4>
+              <h4 className="text-xl font-bold text-foreground mb-2">
+                Prefer a quick call?
+              </h4>
               <p className="text-muted-foreground text-sm font-light mb-6">
                 Book a free 30-minute intro call to discuss your project.
               </p>
