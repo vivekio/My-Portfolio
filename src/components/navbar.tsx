@@ -33,7 +33,9 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "py-4 glass shadow-lg" : "py-6 bg-transparent"
+        isScrolled
+          ? "py-4 bg-neutral-950/95 text-white shadow-lg border-b border-white/5"
+          : "py-6 bg-transparent text-black"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -45,7 +47,9 @@ export default function Navbar() {
               alt="VP Logo"
               width={40}
               height={40}
-              className="w-10 h-10 object-contain dark:invert-0 invert"
+              className={`w-10 h-10 object-contain transition-all duration-300 ${
+                isScrolled ? "" : "invert"
+              }`}
             />
           </div>
         </Link>
@@ -56,16 +60,26 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hover-target relative group"
+              className={`text-sm font-medium transition-colors hover-target relative group ${
+                isScrolled ? "text-zinc-400 hover:text-white" : "text-zinc-600 hover:text-black"
+              }`}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full" />
+              <span
+                className={`absolute -bottom-1 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${
+                  isScrolled ? "bg-white" : "bg-black"
+                }`}
+              />
             </Link>
           ))}
 
           <Link
             href="#contact"
-            className="hover-target px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold hover:scale-105 transition-transform"
+            className={`hover-target px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+              isScrolled
+                ? "bg-white text-black hover:bg-zinc-200"
+                : "bg-black text-white hover:bg-zinc-800"
+            }`}
           >
             Let&apos;s Talk
           </Link>
@@ -75,7 +89,9 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-4">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-foreground focus:outline-none"
+            className={`focus:outline-none transition-colors ${
+              isScrolled ? "text-white" : "text-black"
+            }`}
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
