@@ -40,47 +40,51 @@ export default function Main() {
         >
           <span className="w-12 h-[2px] bg-foreground" />
           <h2 className="text-sm md:text-base font-semibold tracking-widest uppercase text-muted-foreground">
-            Full Stack Developer
+            Vivek Pankhaniya
           </h2>
         </motion.div>
 
         <motion.div variants={itemVariants} className="space-y-4">
-          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground leading-tight break-words">
-            VIVEK <br />
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground">
-              PANKHANIYA
-            </span>
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground leading-tight break-words">
+            I build{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground">
+              AI-powered systems
+            </span>{" "}
+            that cut real business costs
           </h1>
         </motion.div>
 
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl max-w-2xl font-light leading-relaxed"
+          className="text-lg md:text-xl max-w-2xl font-light leading-relaxed text-muted-foreground"
         >
-          I build scalable web applications, enterprise APIs, AI-powered
-          solutions, cloud infrastructure, and automation systems that solve
-          real business problems.
+          Like the automation platform that reduced manual data entry by 80% at Actowiz — I solve hard engineering problems with MERN stack, Next.js, and AI.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center gap-6 pt-4"
+          className="flex flex-col items-start gap-4 pt-4"
         >
-          <a
-            href="#projects"
-            className="hover-target group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 bg-foreground text-background font-semibold rounded-full hover:scale-105 transition-transform"
-          >
-            View Work
-            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href="/Vivek Pankhaniya.pdf"
-            download
-            className="hover-target flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 glass border border-border text-foreground font-semibold rounded-full hover:bg-muted transition-colors"
-          >
-            <Download className="w-4 h-4" />
-            Download Resume
-          </a>
+          <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+            <a
+              href="#projects"
+              className="hover-target group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 bg-foreground text-background font-semibold rounded-full hover:scale-105 transition-transform"
+            >
+              See My Work
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="/Vivek Pankhaniya.pdf"
+              download
+              className="hover-target flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 glass border border-border text-foreground font-semibold rounded-full hover:bg-muted transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Download Resume
+            </a>
+          </div>
+          <p className="text-xs text-muted-foreground/80 font-medium pl-2">
+            Currently available for freelance & full-time opportunities
+          </p>
         </motion.div>
       </motion.div>
 
@@ -104,7 +108,10 @@ export default function Main() {
               width={400}
               height={400}
               className="object-cover w-full h-full scale-110 hover:scale-100 transition-transform duration-700"
-              priority
+              priority={true}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/yQABAgEBAQEBAQAAAAAAAAAAAAAAAAACAQMF/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA="
+              sizes="(max-width: 768px) 100vw, 400px"
             />
           </div>
         </div>

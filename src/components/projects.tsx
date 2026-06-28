@@ -12,45 +12,93 @@ export default function Projects() {
       title: "TaxiTime",
       subtitle: "Real-time Taxi Booking Platform",
       tech: ["React.js", "Node.js", "Express.js", "MySQL", "Socket.IO"],
-      overview:
-        "A comprehensive real-time taxi booking platform enabling users to request rides and drivers to accept them instantly.",
+      problem: "Real-time booking coordination across drivers and passengers.",
+      solution: "Implemented Socket.IO for low-latency WebSockets communication, ensuring instant ride updates.",
+      metric: "Real-time across 100+ concurrent users",
+      liveUrl: "#",
+      githubUrl: "#",
+      image: "/taxitime.png",
+      gradient: "from-blue-600 to-indigo-900",
+      overview: "A comprehensive real-time taxi booking platform enabling users to request rides and drivers to accept them instantly.",
       features: [
         "Real-time location tracking",
         "Live ride status updates",
         "Driver matching algorithm",
         "Secure payment gateway integration",
       ],
-      challenges:
-        "Handling real-time bidirectional data flow efficiently without overwhelming the server.",
-      solution:
-        "Implemented Socket.IO for low-latency WebSockets communication, ensuring instant ride updates.",
-      architecture:
-        "Microservices-inspired architecture separating the core API from the real-time websocket server.",
-      impact:
-        "Reduced ride matching time by 40% and improved driver-user communication reliability.",
-      image: "/taxitime.png",
+      challenges: "Handling real-time bidirectional data flow efficiently without overwhelming the server.",
+      solutionDetail: "Implemented Socket.IO for low-latency WebSockets communication, ensuring instant ride updates.",
+      architecture: "Microservices-inspired architecture separating the core API from the real-time websocket server.",
+      impact: "Reduced ride matching time by 40% and improved driver-user communication reliability.",
     },
     {
       title: "H Cart",
       subtitle: "Inventory & Sales Management System",
       tech: ["Next.js", "Node.js", "MySQL"],
-      overview:
-        "An enterprise-level inventory and sales management dashboard for businesses to track stock and revenue.",
+      problem: "Manual inventory tracking causing stock errors and revenue loss.",
+      solution: "Optimized MySQL queries and implemented server-side rendering with Next.js for instant page loads.",
+      metric: "Tracks 500+ SKUs",
+      liveUrl: "#",
+      githubUrl: "#",
+      image: "/Hcart.png",
+      gradient: "from-emerald-600 to-teal-900",
+      overview: "An enterprise-level inventory and sales management dashboard for businesses to track stock and revenue.",
       features: [
         "Real-time inventory tracking",
         "Sales analytics dashboard",
         "Role-based access control",
         "Automated low-stock alerts",
       ],
-      challenges:
-        "Managing complex relational data for thousands of products while keeping the dashboard fast.",
-      solution:
-        "Optimized MySQL queries and implemented server-side rendering with Next.js for instant page loads.",
-      architecture:
-        "Monolithic Node.js backend with Next.js serving as a dynamic frontend.",
-      impact:
-        "Streamlined inventory operations, reducing stock discrepancies by over 80%.",
-      image: "/Hcart.png",
+      challenges: "Managing complex relational data for thousands of products while keeping the dashboard fast.",
+      solutionDetail: "Optimized MySQL queries and implemented server-side rendering with Next.js for instant page loads.",
+      architecture: "Monolithic Node.js backend with Next.js serving as a dynamic frontend.",
+      impact: "Streamlined inventory operations, reducing stock discrepancies by over 80%.",
+    },
+    {
+      title: "Enterprise API Hub",
+      subtitle: "Centralized API Gateway",
+      tech: ["Node.js", "Express.js", "MongoDB", "Redis", "JWT"],
+      problem: "Securing, rate-limiting, and analyzing multiple microservices under a single entry point.",
+      solution: "Built a centralized API gateway with rate limiting, OAuth2, and usage analytics.",
+      metric: "Handles 10k+ requests/day",
+      liveUrl: "#",
+      githubUrl: "#",
+      image: "",
+      gradient: "from-purple-600 to-indigo-900",
+      overview: "A secure, high-performance API gateway serving as a single entry point for microservices.",
+      features: [
+        "Rate limiting & throttling",
+        "OAuth2 & JWT Authentication",
+        "Real-time usage analytics",
+        "Request/Response transformation",
+      ],
+      challenges: "Preventing service abuse and maintaining low latency during high traffic spikes.",
+      solutionDetail: "Implemented Redis-based token bucket rate limiting and optimized route caching.",
+      architecture: "Reverse proxy architecture built with Node.js and Express, backed by Redis and MongoDB.",
+      impact: "Secured backend services and handles 10k+ requests/day with under 50ms overhead.",
+    },
+    {
+      title: "AI Workflow Automation",
+      subtitle: "LLM-Powered Document Processor",
+      tech: ["OpenAI API", "Node.js", "React.js", "MongoDB"],
+      problem: "Manual document processing causing operational bottlenecks and high error rates.",
+      solution: "Developed an LLM-powered platform that automated document processing workflows.",
+      metric: "80% manual work saved",
+      liveUrl: "#",
+      githubUrl: "#",
+      image: "",
+      gradient: "from-rose-600 to-orange-900",
+      overview: "An intelligent document processing platform that extracts, categorizes, and acts on business documents.",
+      features: [
+        "LLM-based text extraction",
+        "Automated email responses",
+        "Intelligent categorization",
+        "Workflow builder UI",
+      ],
+      challenges: "Handling unstructured document formats and maintaining high extraction accuracy.",
+      solutionDetail: "Utilized structured JSON output from OpenAI GPT-4o combined with vector embeddings for validation.",
+      architecture: "Next.js frontend with Node.js orchestrator and MongoDB database.",
+      impact: "Reduced client manual data entry by 80% and minimized processing errors.",
     },
   ];
 
@@ -81,7 +129,7 @@ export default function Projects() {
           </h3>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
@@ -89,38 +137,84 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer"
-              onClick={() => setSelectedProject(idx)}
+              className="group flex flex-col justify-between rounded-3xl overflow-hidden border border-border bg-white/[0.02] hover:border-foreground/30 transition-all duration-300 shadow-xl"
             >
-              {/* Background Cover */}
-              <div
-                className="absolute inset-0 bg-muted/20 group-hover:scale-105 transition-transform duration-700 bg-cover bg-center"
-                style={{ backgroundImage: `url(${project.image})` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+              {/* Card Image / Placeholder */}
+              <div className="relative h-48 w-full overflow-hidden flex items-center justify-center">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                    }}
+                  />
+                ) : null}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} flex items-center justify-center p-6 text-center`}>
+                  <span className="text-2xl font-black text-white/90 tracking-tight">{project.title}</span>
+                </div>
 
-              {/* Content */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <h4 className="text-3xl font-bold text-white mb-2 transform group-hover:-translate-y-2 transition-transform duration-300">
-                  {project.title}
-                </h4>
-                <p className="text-gray-300 mb-4 transform group-hover:-translate-y-2 transition-transform duration-300 delay-75">
-                  {project.subtitle}
-                </p>
-                <div className="flex flex-wrap gap-2 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-150">
-                  {project.tech.slice(0, 3).map((t, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20"
+                {/* Metric Badge */}
+                {project.metric && (
+                  <span className="absolute top-4 right-4 px-3 py-1 text-xs font-semibold rounded-full bg-foreground text-background shadow-lg z-10">
+                    {project.metric}
+                  </span>
+                )}
+              </div>
+
+              {/* Card Body */}
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-bold text-foreground">{project.title}</h4>
+                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mt-0.5">{project.subtitle}</p>
+                  </div>
+
+                  <div className="space-y-3 mb-6">
+                    <p className="text-sm text-foreground/90 leading-relaxed">
+                      <strong className="text-muted-foreground font-medium">Problem:</strong> {project.problem}
+                    </p>
+                    <p className="text-sm text-foreground/90 leading-relaxed">
+                      <strong className="text-muted-foreground font-medium">Solution:</strong> {project.solution}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {project.tech.map((t, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/[0.04] border border-white/10 text-muted-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={project.liveUrl}
+                      className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-full bg-foreground text-background hover:opacity-90 transition-opacity"
                     >
-                      {t}
-                    </span>
-                  ))}
-                  {project.tech.length > 3 && (
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20">
-                      +{project.tech.length - 3}
-                    </span>
-                  )}
+                      Live Demo &rarr;
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-full border border-border text-foreground hover:bg-white/5 transition-colors"
+                    >
+                      GitHub &rarr;
+                    </a>
+                    <button
+                      onClick={() => setSelectedProject(idx)}
+                      className="ml-auto text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 cursor-pointer"
+                    >
+                      Case Study
+                    </button>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -297,7 +391,7 @@ export default function Projects() {
                     <h4 className="text-xl font-bold mb-3">Solution</h4>
 
                     <p className="text-muted-foreground">
-                      {projects[selectedProject].solution}
+                      {projects[selectedProject].solutionDetail || projects[selectedProject].solution}
                     </p>
                   </div>
                 </div>

@@ -10,13 +10,11 @@ export default function Experience() {
       role: "Full Stack Developer",
       date: "Jun 2025 - Present",
       responsibilities: [
-        "Enterprise API Development",
-        "API Hub Systems",
-        "Automation Platforms",
-        "Dashboard Development",
-        "Backend Architecture",
-        "Data Delivery Optimization",
-        "Third Party API Integration",
+        "Built enterprise API hub serving high-volume data delivery pipelines",
+        "Developed AI automation platform reducing client manual data entry by 80%",
+        "Architected multi-tenant dashboard with role-based access control",
+        "Integrated OpenAI and Gemini APIs for intelligent workflow automation",
+        "Managed cloud infrastructure on AWS with Docker + CI/CD pipelines",
       ],
     },
     {
@@ -24,8 +22,8 @@ export default function Experience() {
       role: "Full Stack Developer",
       date: "Jan 2025 - Jun 2025",
       responsibilities: [
-        "Assisted in full stack web application development",
-        "Worked on backend API integrations and frontend user interfaces",
+        "Delivered 3+ full-stack features across React frontend and Node.js backend",
+        "Integrated third-party REST APIs reducing data sync time significantly",
       ],
     },
     {

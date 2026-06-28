@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -39,10 +40,13 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="hover-target group">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-black tracking-tighter text-foreground">
-              VP
-            </span>
-            <span className="w-2 h-2 rounded-full bg-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <Image
+              src="/logo-dark_2.svg"
+              alt="VP Logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 object-contain dark:invert-0 invert"
+            />
           </div>
         </Link>
 

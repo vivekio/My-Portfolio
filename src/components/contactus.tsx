@@ -12,6 +12,7 @@ export default function ContactUs() {
   });
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const [intent, setIntent] = useState<"freelance" | "fulltime">("freelance");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +82,7 @@ export default function ContactUs() {
 
             <div className="space-y-6">
               <a
-                href="mailto:pankhaniyavivek9@gmail.com"
+                href="mailto:pankhaniyavivek10@gmail.com"
                 className="flex items-center gap-4 group"
               >
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -131,19 +132,73 @@ export default function ContactUs() {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Contact Form & Call Booking */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
+            className="space-y-8"
           >
+            {/* Calendly CTA Card */}
+            <div className="relative overflow-hidden rounded-3xl border border-border bg-white/[0.02] p-8 shadow-lg">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-foreground/[0.02] rounded-full blur-2xl pointer-events-none" />
+              <h4 className="text-xl font-bold text-foreground mb-2">Prefer a quick call?</h4>
+              <p className="text-muted-foreground text-sm font-light mb-6">
+                Book a free 30-minute intro call to discuss your project.
+              </p>
+              <a
+                href="https://calendly.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-bold hover:opacity-90 transition-opacity text-sm"
+              >
+                Schedule a Call &rarr;
+              </a>
+            </div>
+
             <form
               onSubmit={handleSubmit}
               className="glass p-8 md:p-10 rounded-3xl border border-border space-y-6 relative overflow-hidden"
             >
               {/* Form Background Blur effect */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-foreground opacity-[0.03] rounded-full blur-3xl pointer-events-none" />
+
+              {/* Intent Toggle */}
+              <div className="space-y-3">
+                <label className="text-sm font-medium text-foreground ml-1">
+                  I want to discuss:
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setIntent("freelance")}
+                    className={`py-3 px-4 rounded-xl border font-semibold text-sm transition-all cursor-pointer ${
+                      intent === "freelance"
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border bg-background text-foreground hover:bg-white/5"
+                    }`}
+                  >
+                    Freelance Project
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIntent("fulltime")}
+                    className={`py-3 px-4 rounded-xl border font-semibold text-sm transition-all cursor-pointer ${
+                      intent === "fulltime"
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border bg-background text-foreground hover:bg-white/5"
+                    }`}
+                  >
+                    Full-time Opportunity
+                  </button>
+                </div>
+                <p className="text-sm text-muted-foreground font-light italic mt-2 ml-1">
+                  {intent === "freelance"
+                    ? "Tell me about your project — timeline, tech stack, and goals."
+                    : "I'm open to full-time roles. Share the JD or company details."}
+                </p>
+              </div>
 
               <div className="space-y-2">
                 <label
