@@ -116,7 +116,7 @@ export default function ContactUs() {
                     WhatsApp
                   </p>
                   <p className="text-lg text-foreground font-medium group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-muted-foreground transition-all">
-                    +91 XXXXX XXXXX
+                    +91 95105 58572
                   </p>
                 </div>
               </a>
@@ -170,10 +170,11 @@ export default function ContactUs() {
                 Prefer a quick call?
               </h4>
               <p className="text-muted-foreground text-sm font-light mb-6">
-                Book a free 30-minute intro call to discuss your project.
+                I'm available on WhatsApp. Send a message to discuss your
+                project.
               </p>
               <a
-                href="https://calendly.com"
+                href="https://wa.me/919510558572"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-bold hover:opacity-90 transition-opacity text-sm"
